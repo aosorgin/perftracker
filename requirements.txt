@@ -1,4 +1,4 @@
-django
+django<3.0.0
 django-echarts
 django-datatables-view
 django-request-logging
@@ -10,7 +10,7 @@ django-bootstrap3
 django-group-by
 perftrackerlib>=0.0.40
 pillow
-psycopg2
+psycopg2>=2.8,<2.9
 lorem
 python-ldap
 django-auth-ldap

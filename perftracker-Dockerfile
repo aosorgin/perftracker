@@ -1,0 +1,18 @@
+FROM python:3.6
+
+COPY . /home/perftracker
+WORKDIR /home/perftracker
+
+#RUN  git clone https://github.com/perfguru87/perftracker.git /home/perftracker \
+#  && pip install pycurl \
+RUN  pip install pycurl \
+  && apt update \
+  && apt install -y gcc python3-dev libsasl2-dev libldap2-dev libssl-dev uwsgi uwsgi-plugin-python3 \
+  && cd /home/perftracker \
+  && pip install -r requirements.txt
+
+WORKDIR /home/perftracker
+
+COPY tools/update_database.sh /home/perftracker/
+
+RUN bash update_database.sh

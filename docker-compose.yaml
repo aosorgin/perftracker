@@ -1,0 +1,30 @@
+version: "3"
+services:
+  postgres:
+    image: "postgres:14"
+    restart: always
+    environment:
+      POSTGRES_DB: pt
+      POSTGRES_PASSWORD: example
+    volumes:
+      - perftracker-data:/var/lib/postgresql/data
+
+  perftracker:
+    build:
+      context: .
+      dockerfile: perftracker-Dockerfile
+    #command: bash -c /entrypoint.sh
+    command: bash -c 'while true; do sleep 1; done'
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/home/perftracer
+
+  test1:
+    build:
+      context: .
+      dockerfile: client-Dockerfile
+    command: bash -c 'while true; do sleep 1; done'
+
+volumes:
+  perftracker-data:
